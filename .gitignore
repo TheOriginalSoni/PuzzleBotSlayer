@@ -19,3 +19,4 @@ __pycache__
 env/
 error_logfile.txt
 error_webhook.txt
+.DS_Store
