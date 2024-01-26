@@ -12,7 +12,7 @@ from utils import ciphers, external_api, paging_utils
 Wesbites module. 
 """
 
-class WesbsitesCog(commands.Cog, name="Websites"):
+class WebsitesCog(commands.Cog, name="Websites"):
     """
     All random websites
     """
@@ -126,6 +126,11 @@ class WesbsitesCog(commands.Cog, name="Websites"):
 
     @commands.command(aliases=['r'])
     async def regex(self, ctx, *tokens):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("regex", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
 
         if len(tokens) <= 0 or tokens[0].lower() == 'help':
             help_str = '\n'.join(constants.REGEX_HELP_STR)
@@ -174,6 +179,12 @@ class WesbsitesCog(commands.Cog, name="Websites"):
 
     @commands.command(aliases=['c'])
     async def crossword(self, ctx, *tokens):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("crossword", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
+
         def _print_row(row, max_answer_length):
             print(row)
             return ('*' * row[0] + ' ' * (5 - row[0]) + ' ' +
@@ -192,6 +203,11 @@ class WesbsitesCog(commands.Cog, name="Websites"):
 
     @commands.command(aliases=['syn', 'syns', 'synonyms'])
     async def synonym(self, ctx, *tokens):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("synonym", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
         content = ' '.join(tokens)
 
         response = external_api.synonyms(content)
@@ -202,26 +218,24 @@ class WesbsitesCog(commands.Cog, name="Websites"):
     @commands.command(aliases=['ant', 'ants', 'antonyms', 'opps', \
                     'opposite', 'opposites'])
     async def antonym(self, ctx, *tokens):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("antonym", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
         content = ' '.join(tokens)
 
         response = external_api.antonyms(content)
         response = '`' + ' '.join(response)[:1350] + '`'
         await ctx.send(response)
 
-
-    @commands.command(aliases=['n', 'nm', 'nutri'])
-    async def nutrimatic(self, ctx, *tokens):
-        content = ''.join(tokens)
-
-        url, results = external_api.nutrimatic(content)
-        await ctx.send('<' + url +
-                                '>\n```\n' +
-                                '\n'.join(results) + '```')
-        return
-
-
     @commands.command(aliases=['v', 'vignere'])
     async def vigenere(self, ctx, *args):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("vignere", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
         tokens = ' '.join(args)
         key, decoded = external_api.solve_vigenere(tokens)
         response = f'{decoded}\n(key: {key})'
@@ -231,6 +245,11 @@ class WesbsitesCog(commands.Cog, name="Websites"):
     @commands.command(aliases=['qq', 'quip', 'quipquip', 'qiupqiup', 'quipqiup', \
                     'crypto'])
     async def cryptogram(self, ctx, *args):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("cryptogram", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
         tokens = ' '.join(args)
 
         responses = external_api.solve_cryptogram(tokens)
@@ -242,6 +261,11 @@ class WesbsitesCog(commands.Cog, name="Websites"):
 
     @commands.command(aliases=['q'])
     async def qat(self, ctx, *args):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("qat", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
         content = ''.join(args)
 
         url, results = external_api.qat(content)
@@ -267,6 +291,11 @@ class WesbsitesCog(commands.Cog, name="Websites"):
 
     @commands.command(aliases=['t', 'common'])
     async def commonalities(self, ctx, *args):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("commonalities", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
         words = [w.lower() for w in args]
 
         if len(words) < 3:
@@ -288,6 +317,11 @@ class WesbsitesCog(commands.Cog, name="Websites"):
 
     @commands.command(aliases=['wolfram', 'alpha', 'wa'])
     async def wolframalpha(self, ctx, *args):
+        """
+        COMMAND DESCRIPTION #TODO
+        """
+        await logging_utils.log_command("wolframalpha", ctx.guild, ctx.channel, ctx.author)
+        embed = discord_utils.create_embed()
         if len(args) > 0:
             words = ' '.join(args)
             out = external_api.wolfram_alpha(words)
@@ -297,4 +331,4 @@ class WesbsitesCog(commands.Cog, name="Websites"):
 
 
 def setup(bot):
-    bot.add_cog(WesbsitesCog(bot))
+    bot.add_cog(WebsitesCog(bot))
