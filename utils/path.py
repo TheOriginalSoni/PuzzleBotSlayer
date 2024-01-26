@@ -10,27 +10,6 @@ import pickle
 import unicodedata
 
 
-def asciify(text):
-    """
-    A wonderful function to remove accents from characters, and
-    discard other non-ASCII characters. Outputs a string of only ASCII
-    characters.
-
-    >>> print(asciify('ædœomycodermis'))
-    aedoeomycodermis
-
-    >>> print(asciify('Zürich'))
-    Zurich
-
-    >>> print(asciify('-نہیں'))
-    -
-    """
-    # Deal with annoying British vowel ligatures
-    text = text.replace('Æ', 'AE').replace('Œ', 'OE')\
-               .replace('æ', 'ae').replace('œ', 'oe')
-    return unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('ASCII')
-
-
 def _build_path(parts):
     "Make a path out of the given path fragments."
     return os.path.sep.join(p for p in parts if p)
@@ -43,7 +22,9 @@ def module_path():
     of the solvertools package."""
     return os.path.dirname(__file__)
 
+
 PACKAGE_DIR = os.path.dirname(module_path())
+
 
 def data_path(path):
     "Get a complete path for a file in the data directory."
@@ -92,4 +73,3 @@ def save_pickle(obj, path):
 def file_exists(path):
     "Test whether a given file exists. You must specify the full path."
     return os.access(path, os.F_OK)
-
